@@ -1,2 +1,2 @@
 # SoftDev
-* HW #1: Randomizer
+* HW #1: RandomStudent.py
