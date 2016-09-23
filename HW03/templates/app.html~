@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>Occupations</title> 
+   <body>
+     
+     
+     {{item}}
+    
+   
+   </body>
+   
+  </head>
+</html>
