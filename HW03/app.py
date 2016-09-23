@@ -1,4 +1,4 @@
-#HW02: Write a Flask app with 3 routes
+#HW03
 
 from flask import Flask, render_template
 app = Flask(__name__)
@@ -12,7 +12,7 @@ def index():
         <a href="/start">CLICK ME </a>
         <a href="/end">End</a>'''
 	
-@app.route("/start")
+@app.route("/Occupations")
 def start():
 	return '''<a href="http://127.0.0.1:5000">Hello </a>
         <a href="/start">CLICK ME </a>
