@@ -3,19 +3,17 @@
   <head>
    <title>Occupations</title> 
    <body>
-     {{item}}
-  <!---
      <table>
-       {% for i in range(23) %}
+       {% for occ in dic %}
        <tr>
 	 <th> {{occ}} </th>
-	 <td> {{per}} </td>
+	 <td> {{dic[occ]}} </td>
        </tr>
        {% endfor %}
      </table>
      <br>
-     {{random}}
-     --->
+     Random Occupations: {{random_job}}
+    
    </body>
    
   </head>

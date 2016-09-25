@@ -1,39 +1,48 @@
 #HW03
 
 from flask import Flask, render_template
+from collections import OrderedDict 
 app = Flask(__name__)
 
-from Occupations import whichOcc, retOcc, dat
+from Occupations import whichOcc
 
 
 @app.route("/")
 def index():
 	return '''<a href="http://127.0.0.1:5000">Hello </a>
-        <a href="/start">CLICK ME </a>
+        <a href="/Occupations">CLICK ME </a>
         <a href="/end">End</a>'''
-	
+
+#creating dictionary for occupations
+data = open("occupations.csv").read()
+data = data.replace(', ', '+')
+data = data.replace(',', '\n').split('\n')
+for x in range(0, len(data)):
+    data[x] = data[x].replace('+', ', ')
+
+occ = []
+per = []
+
+while len(data) > 1:
+    occ.append(data[0])
+    per.append(data[1])
+    data = data[2:]
+
+dic = OrderedDict()
+count = 0
+for i in occ:
+    dic[i] = per[count]
+    count += 1
+
 @app.route("/Occupations")
 def start():
-	return '''<a href="http://127.0.0.1:5000">Hello </a>
-        <a href="/start">CLICK ME </a>
-        <a href="/end">End</a>'''+table()+"<br> Random Occupation: "+whichOcc()
+	return render_template("app.html", dic=dic, random_job=whichOcc())
 
-#render_template("app.html", item=table()+"<br>"+whichOcc())
-
-def table():
-    start = '''<table style="width:100%">'''
-    for i in range(23):
-        start += '''<tr>
-        <th>'''+retOcc('O',i)+'''</th>
-        <th>'''+retOcc('P',i)+'''</th>
-        </tr>'''
-    end = '''</table>'''
-    return start+end
 
 @app.route("/end")
 def end():
         return '''<a href="http://127.0.0.1:5000">Hello </a>
-        <a href="/start">CLICK ME </a>
+        <a href="/Occupations">CLICK ME </a>
         <a href="/end">End</a>'''
 
 if __name__ == "__main__":
