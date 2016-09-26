@@ -1,3 +1,5 @@
+#Jiaqi Gao
+#SoftDev Pd08
 #HW03
 
 from flask import Flask, render_template
@@ -6,13 +8,7 @@ app = Flask(__name__)
 
 from Occupations import whichOcc
 
-
-@app.route("/")
-def index():
-	return '''<a href="http://127.0.0.1:5000">Hello </a>
-        <a href="/Occupations">CLICK ME </a>
-        <a href="/end">End</a>'''
-
+############################################
 #creating dictionary for occupations
 data = open("occupations.csv").read()
 data = data.replace(', ', '+')
@@ -22,17 +18,23 @@ for x in range(0, len(data)):
 
 occ = []
 per = []
-
 while len(data) > 1:
     occ.append(data[0])
     per.append(data[1])
     data = data[2:]
-
-dic = OrderedDict()
+occ = occ[:len(occ)-1]
+per = per[:len(per)-1]
+dic = OrderedDict()#dictionary with occupations
 count = 0
 for i in occ:
     dic[i] = per[count]
     count += 1
+##########################################
+@app.route("/")
+def index():
+	return '''<a href="http://127.0.0.1:5000">Hello </a>
+        <a href="/Occupations"> CLICK ME </a>
+        <a href="/end"> End </a>'''
 
 @app.route("/Occupations")
 def start():
@@ -42,8 +44,8 @@ def start():
 @app.route("/end")
 def end():
         return '''<a href="http://127.0.0.1:5000">Hello </a>
-        <a href="/Occupations">CLICK ME </a>
-        <a href="/end">End</a>'''
+        <a href="/Occupations"> CLICK ME </a>
+        <a href="/end"> End </a>'''
 
 if __name__ == "__main__":
     app.debug = True
