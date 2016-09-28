@@ -1,0 +1,17 @@
+#Jiaqi Gao
+#SoftDev Pd08
+#Presidential Debate
+
+from flask import Flask, render_template
+app = Flask(__name__)
+
+data=open("phrase.csv").read()
+
+@app.route("/")
+def index():
+	return '''<a href="http://127.0.0.1:5000">Hello </a>
+
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()

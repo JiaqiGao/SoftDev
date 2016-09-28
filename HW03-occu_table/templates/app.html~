@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Occupations</title>
+    <style>
+      table {
+          border-collapse: collapse;
+      }
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+   <body>
+     <center><h1> Jobs? </h1></center>
+     <table>
+       <tr>
+	 <th><b>Occupations</b></th>
+	 <td><b>Percentage</b></td>
+       </tr>
+       {% for occ in dic %}
+       <tr>
+	 <th><a href="{{dic.get(occ)[1]}}"> {{occ}} </a> </th>
+	 <td> {{dic.get(occ)[0]}} </td>
+       </tr>
+       {% endfor %}
+     </table>
+     <br>
+     Random Weighted Occupation: {{random_job}}
+    
+   </body>
+   
+  </head>
+</html>
