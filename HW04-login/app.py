@@ -1,18 +1,37 @@
 #Jiaqi Gao
 #SoftDev Pd08
-#HW4: Augment your latest Flask app to allow for registration and store username#/password combos.
+#HW5: Augment your latest Flask app to facilitate sessions and redirection.
 
 import hashlib, csv, os
-from flask import Flask, render_template, request
+from flask import Flask, session, render_template, request, redirect, url_for
+
 app = Flask(__name__)
+
+app.secret_key = os.urandom(32)
 
 @app.route("/")
 def index():
+    if 'usr' in session:
+        return render_template("home.html", user=session["usr"])
+    return redirect(url_for('login'))
+
+@app.route("/login")
+def login():
     createdict()
     return render_template("form.html")
 
+@app.route("/logout")
+def logout():
+    session.pop('usr')
+    return redirect(url_for('login'))
+
 csv = "static/storage.csv"
 storage = dict()
+
+#@app.route("/jacobo")
+#def js():
+ #   print(url_for("index"))
+  #  return redirect("http://xkcd.com")
 
 #creates dictionary out of the csv file data, username : password
 def createdict():
@@ -34,7 +53,8 @@ def authenticate():
     #if exists, checks if password is correct, if not, tells you pass is wrong
     if usr in storage:
         if hasher(pd) == storage[usr]:
-            return render_template("success.html", result="You've successfully signed in")
+            session['usr'] = usr 
+            return render_template("home.html", user=session['usr'])
         else:
             return render_template("success.html", result="*Password is incorrect*")
     else:
